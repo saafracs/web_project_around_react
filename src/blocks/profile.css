@@ -1,0 +1,139 @@
+.profile {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 50px 0;
+  align-items: center;
+}
+
+.profile-name {
+  text-overflow: ellipsis;
+  max-width: 50vw;
+  overflow: hidden;
+  font-size: 44px;
+  margin: 26px 0 0 0;
+}
+
+.profile-title {
+  font-size: 18px;
+  max-width: 50vw;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.profile__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.profile__edit-button {
+  max-width: 24px;
+  max-height: 24px;
+  margin: 0 0 0 18px;
+  transition: opacity 0.3s ease;
+}
+
+.profile__details {
+  display: flex;
+  align-items: center;
+}
+
+.profile__edit-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.profile__add-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.profile__add-button {
+  width: 150px;
+  height: 50px;
+  display: flex;
+  justify-self: center;
+  transition: opacity 0.3s ease;
+}
+
+.profile-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 30px 0 0;
+}
+
+.profile-image__pic {
+  border-radius: 100%;
+  width: 127px;
+  height: 127px;
+  object-fit: cover;
+  object-position: 0% 0%;
+  transition: opacity ease-in-out 0.3s;
+}
+
+.profile-image__icon {
+  background-image: url(../images/edit-pencil.svg);
+  opacity: 0;
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  z-index: 1;
+  transition: opacity ease-in-out 0.3s;
+}
+
+.profile-image:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1300px) {
+  .profile {
+    width: 69%;
+    margin: 0 auto 50px auto;
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .profile {
+    width: 100%;
+    justify-content: space-around;
+    margin: 0 auto 50px auto;
+  }
+}
+
+@media screen and (max-width: 780px) {
+  .profile {
+    flex-wrap: wrap;
+  }
+
+  .profile__add-button {
+    margin: 36px 0 0 0;
+    width: 92%;
+  }
+  .profile__content {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile-name {
+    font-size: 22px;
+  }
+
+  .profile-title {
+    font-size: 14px;
+  }
+
+  .profile__info {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+  }
+
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+  }
+}
