@@ -1,6 +1,6 @@
 # Project Around US (Westeros)
 
-![Captura de Pantalla](./images/preview.jpg)  
+![Captura de Pantalla](../web_project_around_react/src/images/preview.jpg)  
 Perfil de presentación con galeria de imagenes, permite actualizar el nombre y la descripción e insetar nuevas imagenes.
 
 ## Tecnologías Usadas
