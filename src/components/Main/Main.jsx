@@ -1,60 +1,87 @@
-import { useState } from "react";
-import profilePic from "../../images/profile.jpg";
+import { useState, useEffect, useContext, useRef } from "react";
+
+import api from "../../utils/api.jsx";
 import addPicture from "../../images/add-button.svg";
 import editProfile from "../../images/edit-button.svg";
-import NewCard from "../../components/Main/components/Popup/form/NewCard/NewCard.jsx";
 import Popup from "./components/Popup/Popup.jsx";
 import Card from "./components/Card/Card.jsx";
-import EditComponentProfile from "./components/Popup/form/EditProfile/EditProfile.jsx";
+
+import EditComponentProfile from "../../components/Main/components/Popup/form/EditProfile/EditProfile.jsx";
+import NewCard from "../../components/Main/components/Popup/form/NewCard/NewCard.jsx";
 import EditAvatar from "../Main/components/Popup/form/EditAvatar/EditAvatar.jsx";
+
 import ImagePopup from "./components/Popup/ImagePopup/ImagePopup.jsx";
+import CurrentUserContext from "../contexts/CurrentUserContext.js";
 
-const cards = [
-  {
-    isLiked: false,
-    _id: "5d1f0611d321eb4bdcd707dd",
-    name: "Yosemite Valley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_yosemite.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:10:57.741Z",
-  },
-  {
-    isLiked: false,
-    _id: "5d1f064ed321eb4bdcd707de",
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_lake-louise.jpg",
-    owner: "5d1f0611d321eb4bdcd707dd",
-    createdAt: "2019-07-05T08:11:58.324Z",
-  },
-];
-
-export default function Main() {
-  const [popup, setPopup] = useState(null);
+export default function Main({ onOpenPopup, popup, handleClosePopup }) {
+  const { currentUser } = useContext(CurrentUserContext);
   const [selectedCard, setSelectedCard] = useState(null);
-
-  const newCardPopup = { title: "Nuevo Lugar", children: <NewCard /> };
-
-  const editButtonProfile = {
-    title: "Editar Perfil",
-    children: <EditComponentProfile />,
-  };
-
-  const editAvatarContent = {
-    title: "Cambia foto de perfil",
-    children: <EditAvatar />,
-  };
-
-  function handleOpenPopup(popup) {
-    setPopup(popup);
-  }
+  const [cards, setCards] = useState([]);
 
   const handleImageClose = () => {
     setSelectedCard(null);
   };
 
-  const handleClosePopup = () => {
-    setPopup(null);
+  const handleAddPlaceSubmit = ({ name, link }) => {
+    api.createCards(name, link).then((card) => setCards([card, ...cards]));
   };
+
+  const newCardPopup = {
+    title: "Nuevo Lugar",
+    children: (
+      <NewCard
+        handleAddPlaceSubmit={handleAddPlaceSubmit}
+        handleClosePopup={handleClosePopup}
+      />
+    ),
+  };
+
+  const editButtonProfile = {
+    title: "Editar Perfil",
+    children: <EditComponentProfile handleClosePopup={handleClosePopup} />,
+  };
+
+  const editAvatarContent = {
+    title: "Cambia foto de perfil",
+    children: <EditAvatar handleClosePopup={handleClosePopup} />,
+  };
+
+  useEffect(() => {
+    api.getCards().then((data) => {
+      setCards(data);
+    });
+  }, [setCards]);
+
+  async function handleCardDelete(card) {
+    await api.removeCard(card._id);
+
+    setCards((state) =>
+      state.filter((currentCard) => currentCard._id !== card._id)
+    );
+  }
+
+  //
+  const handleCardLike = (cardId, isLiked) => {
+    if (isLiked) {
+      api.removeLike(cardId).then((card) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? card : currentCard
+          )
+        );
+      });
+    } else {
+      api.likeCard(cardId).then((card) => {
+        setCards((state) =>
+          state.map((currentCard) =>
+            currentCard._id === card._id ? card : currentCard
+          )
+        );
+      });
+    }
+  };
+  //
+
   return (
     <main className="content">
       {popup && (
@@ -65,30 +92,32 @@ export default function Main() {
 
       <section className="profile">
         <div className="profile__content">
-          <div className="profile-image">
+          <div
+            className="profile-image"
+            onClick={() => {
+              onOpenPopup(editAvatarContent);
+            }}
+          >
             <div className="profile-image__icon"></div>
             <img
-              src={profilePic}
+              src={currentUser.avatar}
               alt="Profile Picture"
               className="profile-image__pic"
-              onClick={() => {
-                handleOpenPopup(editAvatarContent);
-              }}
             />
           </div>
           <div className="profile__info">
             <div className="profile__details">
-              <h2 className="profile-name">...</h2>
+              <h2 className="profile-name">{currentUser.name}</h2>
               <img
                 src={editProfile}
                 alt="edit button"
                 className="profile__edit-button"
                 onClick={() => {
-                  handleOpenPopup(editButtonProfile);
+                  onOpenPopup(editButtonProfile);
                 }}
               />
             </div>
-            <p className="profile-title">...</p>
+            <p className="profile-title">{currentUser.about}</p>
           </div>
         </div>
         <img
@@ -96,7 +125,7 @@ export default function Main() {
           alt="add button"
           className="profile__add-button"
           onClick={() => {
-            handleOpenPopup(newCardPopup);
+            onOpenPopup(newCardPopup);
           }}
         />
       </section>
@@ -107,22 +136,26 @@ export default function Main() {
             name={card.name}
             link={card.link}
             isLiked={card.isLiked}
-            onCardClick={() => {
+            onImageClick={() => {
               {
                 setSelectedCard(card);
               }
+            }}
+            onCardLike={() => {
+              handleCardLike(card._id, card.isLiked);
+            }}
+            onCardDelete={() => {
+              handleCardDelete(card);
             }}
           />
         ))}
       </section>
       {selectedCard && (
-        <Popup>
-          <ImagePopup
-            onClose={handleImageClose}
-            name={selectedCard.name}
-            link={selectedCard.link}
-          />
-        </Popup>
+        <ImagePopup
+          onClose={handleImageClose}
+          name={selectedCard.name}
+          link={selectedCard.link}
+        />
       )}
     </main>
   );

@@ -1,12 +1,26 @@
-# React + Vite
+# Project Around US (Westeros)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![Captura de Pantalla](./images/preview.jpg)  
+Perfil de presentación con galeria de imagenes, permite actualizar el nombre y la descripción e insetar nuevas imagenes.
 
-Currently, two official plugins are available:
+## Tecnologías Usadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **HTML5** - Estructura del proyecto
+- **CSS3** - Estilos y diseño
+- **JavaScript** - Interactividad y funcionalidades
 
-## Expanding the ESLint configuration
+## Características
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- [x] Diseño responsivo
+- [x] Actualizar nombre y descripción
+- [x] Editar imagenes
+- [x] Interactuar con la galeria
+- [x] Guardar información en Base de Datos
+
+## Visualización
+
+- Puedes verlo en vivo [aquí](https://saafracs.github.io/web_project_around/)
+
+## Autor
+
+- **Andres Rivas** - [saafracs](https://github.com/saafracs)

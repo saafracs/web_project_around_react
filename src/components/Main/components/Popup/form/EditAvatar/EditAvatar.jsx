@@ -1,6 +1,24 @@
+import { useContext, useState, useRef } from "react";
+import CurrentUserContext from "../../../../../contexts/CurrentUserContext";
+
 export default function EditAvatar() {
+  const formRef = useRef();
+
+  const userContext = useContext(CurrentUserContext);
+  const { handleUpdateAvatar } = userContext;
+
+  const handleSubmit = (event) => {
+    event.preventDefault(); // Evita el comportamiento predeterminado del envío de formularios
+    const avatar = formRef.current.avatar.value;
+    handleUpdateAvatar(avatar); // Actualiza la información del usuario
+  };
+
   return (
-    <form className="form form_profile-picture">
+    <form
+      className="form form_profile-picture"
+      ref={formRef}
+      onSubmit={handleSubmit}
+    >
       <fieldset className="form__fieldset">
         <input
           type="url"
@@ -12,7 +30,7 @@ export default function EditAvatar() {
         />
         <span className="form__span form__span_type_error avatar-error"></span>
       </fieldset>
-      <button type="submit" className="popup__button" disabled>
+      <button type="submit" className="popup__button">
         Cambiar
       </button>
     </form>
