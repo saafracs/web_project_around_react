@@ -11,7 +11,7 @@ import NewCard from "../../components/Main/components/Popup/form/NewCard/NewCard
 import EditAvatar from "../Main/components/Popup/form/EditAvatar/EditAvatar.jsx";
 
 import ImagePopup from "./components/Popup/ImagePopup/ImagePopup.jsx";
-import CurrentUserContext from "../contexts/CurrentUserContext.js";
+import CurrentUserContext from "../contexts/CurrentUserContext.jsx";
 
 export default function Main({ onOpenPopup, popup, handleClosePopup }) {
   const { currentUser } = useContext(CurrentUserContext);
