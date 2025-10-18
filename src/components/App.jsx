@@ -3,7 +3,7 @@ import Header from "../components/Header/Header.jsx";
 import Main from "./Main/Main.jsx";
 import Footer from "./Footer/Footer.jsx";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../utils/api.jsx";
 
 function App() {
