@@ -16,7 +16,7 @@ Perfil de presentación con galeria de imagenes, permite actualizar el nombre y 
 - [x] Actualizar nombre y descripción
 - [x] Editar imagenes
 - [x] Interactuar con la galeria
-- [x] Guardar información en Base de Datos
+- [x] Uso de API para guardado de datos
 
 ## Visualización
 
