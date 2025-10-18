@@ -1,3 +1,4 @@
+import CurrentUserContext from "../contexts/CurrentUserContext.jsx";
 import { useState, useEffect, useContext, useRef } from "react";
 
 import api from "../../utils/api.jsx";
@@ -11,7 +12,6 @@ import NewCard from "../../components/Main/components/Popup/form/NewCard/NewCard
 import EditAvatar from "../Main/components/Popup/form/EditAvatar/EditAvatar.jsx";
 
 import ImagePopup from "./components/Popup/ImagePopup/ImagePopup.jsx";
-import CurrentUserContext from "../contexts/CurrentUserContext.jsx";
 
 export default function Main({ onOpenPopup, popup, handleClosePopup }) {
   const { currentUser } = useContext(CurrentUserContext);

@@ -1,7 +1,8 @@
+import CurrentUserContext from "./contexts/CurrentUserContext.jsx";
 import Header from "../components/Header/Header.jsx";
 import Main from "./Main/Main.jsx";
 import Footer from "./Footer/Footer.jsx";
-import CurrentUserContext from "./contexts/CurrentUserContext.jsx";
+
 import { useState, useEffect } from "react";
 import api from "../utils/api.jsx";
 
@@ -40,22 +41,20 @@ function App() {
   };
 
   return (
-    <>
-      <CurrentUserContext.Provider
-        value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
-      >
-        <div className="page">
-          <Header />
-          <Main
-            handleUpdateAvatar={handleUpdateAvatar}
-            onOpenPopup={onOpenPopup}
-            handleClosePopup={handleClosePopup}
-            popup={popup}
-          />
-          <Footer />
-        </div>
-      </CurrentUserContext.Provider>
-    </>
+    <CurrentUserContext.Provider
+      value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+    >
+      <div className="page">
+        <Header />
+        <Main
+          handleUpdateAvatar={handleUpdateAvatar}
+          onOpenPopup={onOpenPopup}
+          handleClosePopup={handleClosePopup}
+          popup={popup}
+        />
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
