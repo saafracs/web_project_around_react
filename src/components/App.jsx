@@ -41,10 +41,10 @@ function App() {
 
   return (
     <>
-      <div className="page">
-        <CurrentUserContext.Provider
-          value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
-        >
+      <CurrentUserContext.Provider
+        value={{ currentUser, handleUpdateUser, handleUpdateAvatar }}
+      >
+        <div className="page">
           <Header />
           <Main
             handleUpdateAvatar={handleUpdateAvatar}
@@ -53,8 +53,8 @@ function App() {
             popup={popup}
           />
           <Footer />
-        </CurrentUserContext.Provider>
-      </div>
+        </div>
+      </CurrentUserContext.Provider>
     </>
   );
 }
