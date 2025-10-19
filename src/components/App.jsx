@@ -1,4 +1,4 @@
-import CurrentUserContext from "../contexts/CurrentUserContext.jsx";
+import CurrentUserContext from "../contexts/CurrentUserContext.js";
 import Header from "../components/Header/Header.jsx";
 import Main from "./Main/Main.jsx";
 import Footer from "./Footer/Footer.jsx";
