@@ -1,4 +1,4 @@
-import CurrentUserContext from "../contexts/CurrentUserContext.jsx";
+import CurrentUserContext from "../../../contexts/CurrentUserContext.jsx";
 import { useState, useEffect, useContext } from "react";
 
 import api from "../../utils/api.jsx";
